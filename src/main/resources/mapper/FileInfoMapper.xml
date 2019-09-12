@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pronghorn.coffee.common.dao.FileInfoMapper">
+  <resultMap id="BaseResultMap" type="com.pronghorn.coffee.common.entity.FileInfo">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
+    <result column="UNIQUE_FILE_NAME" jdbcType="VARCHAR" property="uniqueFileName" />
+    <result column="UPLOADER" jdbcType="VARCHAR" property="uploader" />
+    <result column="UPLOAD_DATE" jdbcType="TIMESTAMP" property="uploadDate" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="FILE_ADDRESS" jdbcType="VARCHAR" property="fileAddress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FILE_NAME, UNIQUE_FILE_NAME, UPLOADER, UPLOAD_DATE, TYPE, FILE_ADDRESS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from FILE_INFO
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from FILE_INFO
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pronghorn.coffee.common.entity.FileInfo">
+    insert into FILE_INFO (ID, FILE_NAME, UNIQUE_FILE_NAME, 
+      UPLOADER, UPLOAD_DATE, TYPE, 
+      FILE_ADDRESS)
+    values (#{id,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, #{uniqueFileName,jdbcType=VARCHAR}, 
+      #{uploader,jdbcType=VARCHAR}, #{uploadDate,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, 
+      #{fileAddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pronghorn.coffee.common.entity.FileInfo">
+    insert into FILE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="fileName != null">
+        FILE_NAME,
+      </if>
+      <if test="uniqueFileName != null">
+        UNIQUE_FILE_NAME,
+      </if>
+      <if test="uploader != null">
+        UPLOADER,
+      </if>
+      <if test="uploadDate != null">
+        UPLOAD_DATE,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="fileAddress != null">
+        FILE_ADDRESS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="uniqueFileName != null">
+        #{uniqueFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="uploader != null">
+        #{uploader,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadDate != null">
+        #{uploadDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAddress != null">
+        #{fileAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pronghorn.coffee.common.entity.FileInfo">
+    update FILE_INFO
+    <set>
+      <if test="fileName != null">
+        FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="uniqueFileName != null">
+        UNIQUE_FILE_NAME = #{uniqueFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="uploader != null">
+        UPLOADER = #{uploader,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadDate != null">
+        UPLOAD_DATE = #{uploadDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAddress != null">
+        FILE_ADDRESS = #{fileAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pronghorn.coffee.common.entity.FileInfo">
+    update FILE_INFO
+    set FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      UNIQUE_FILE_NAME = #{uniqueFileName,jdbcType=VARCHAR},
+      UPLOADER = #{uploader,jdbcType=VARCHAR},
+      UPLOAD_DATE = #{uploadDate,jdbcType=TIMESTAMP},
+      TYPE = #{type,jdbcType=VARCHAR},
+      FILE_ADDRESS = #{fileAddress,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

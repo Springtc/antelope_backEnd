@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pronghorn.coffee.goods.dao.GoodsInfoMapper">
+  <resultMap id="BaseResultMap" type="com.pronghorn.coffee.goods.entity.GoodsInfo">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName" />
+    <result column="GOODS_PRICE" jdbcType="DECIMAL" property="goodsPrice" />
+    <result column="GOODS_TYPE" jdbcType="VARCHAR" property="goodsType" />
+    <result column="IMAGE_ID" jdbcType="INTEGER" property="imageId" />
+    <result column="GOODS_STANDARDS" jdbcType="VARCHAR" property="goodsStandards" />
+    <result column="GOODS_SWEETNESS" jdbcType="VARCHAR" property="goodsSweetness" />
+    <result column="GOODS_TEMPERATURE" jdbcType="VARCHAR" property="goodsTemperature" />
+    <result column="GOODS_DESC" jdbcType="VARCHAR" property="goodsDesc" />
+    <result column="ON_SALE" jdbcType="VARCHAR" property="onSale" />
+    <result column="IS_AVAILABLE" jdbcType="VARCHAR" property="isAvailable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, GOODS_NAME, GOODS_PRICE, GOODS_TYPE, IMAGE_ID, GOODS_STANDARDS, GOODS_SWEETNESS, 
+    GOODS_TEMPERATURE, GOODS_DESC, ON_SALE, IS_AVAILABLE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from GOODS_INFO
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from GOODS_INFO
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pronghorn.coffee.goods.entity.GoodsInfo">
+    insert into GOODS_INFO (ID, GOODS_NAME, GOODS_PRICE, 
+      GOODS_TYPE, IMAGE_ID, GOODS_STANDARDS, 
+      GOODS_SWEETNESS, GOODS_TEMPERATURE, GOODS_DESC, 
+      ON_SALE, IS_AVAILABLE)
+    values (#{id,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, 
+      #{goodsType,jdbcType=VARCHAR}, #{imageId,jdbcType=INTEGER}, #{goodsStandards,jdbcType=VARCHAR}, 
+      #{goodsSweetness,jdbcType=VARCHAR}, #{goodsTemperature,jdbcType=VARCHAR}, #{goodsDesc,jdbcType=VARCHAR}, 
+      #{onSale,jdbcType=VARCHAR}, #{isAvailable,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pronghorn.coffee.goods.entity.GoodsInfo">
+    insert into GOODS_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="goodsName != null">
+        GOODS_NAME,
+      </if>
+      <if test="goodsPrice != null">
+        GOODS_PRICE,
+      </if>
+      <if test="goodsType != null">
+        GOODS_TYPE,
+      </if>
+      <if test="imageId != null">
+        IMAGE_ID,
+      </if>
+      <if test="goodsStandards != null">
+        GOODS_STANDARDS,
+      </if>
+      <if test="goodsSweetness != null">
+        GOODS_SWEETNESS,
+      </if>
+      <if test="goodsTemperature != null">
+        GOODS_TEMPERATURE,
+      </if>
+      <if test="goodsDesc != null">
+        GOODS_DESC,
+      </if>
+      <if test="onSale != null">
+        ON_SALE,
+      </if>
+      <if test="isAvailable != null">
+        IS_AVAILABLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null">
+        #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsType != null">
+        #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsStandards != null">
+        #{goodsStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSweetness != null">
+        #{goodsSweetness,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsTemperature != null">
+        #{goodsTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDesc != null">
+        #{goodsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="onSale != null">
+        #{onSale,jdbcType=VARCHAR},
+      </if>
+      <if test="isAvailable != null">
+        #{isAvailable,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pronghorn.coffee.goods.entity.GoodsInfo">
+    update GOODS_INFO
+    <set>
+      <if test="goodsName != null">
+        GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null">
+        GOODS_PRICE = #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsType != null">
+        GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="imageId != null">
+        IMAGE_ID = #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsStandards != null">
+        GOODS_STANDARDS = #{goodsStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSweetness != null">
+        GOODS_SWEETNESS = #{goodsSweetness,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsTemperature != null">
+        GOODS_TEMPERATURE = #{goodsTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDesc != null">
+        GOODS_DESC = #{goodsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="onSale != null">
+        ON_SALE = #{onSale,jdbcType=VARCHAR},
+      </if>
+      <if test="isAvailable != null">
+        IS_AVAILABLE = #{isAvailable,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pronghorn.coffee.goods.entity.GoodsInfo">
+    update GOODS_INFO
+    set GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      GOODS_PRICE = #{goodsPrice,jdbcType=DECIMAL},
+      GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+      IMAGE_ID = #{imageId,jdbcType=INTEGER},
+      GOODS_STANDARDS = #{goodsStandards,jdbcType=VARCHAR},
+      GOODS_SWEETNESS = #{goodsSweetness,jdbcType=VARCHAR},
+      GOODS_TEMPERATURE = #{goodsTemperature,jdbcType=VARCHAR},
+      GOODS_DESC = #{goodsDesc,jdbcType=VARCHAR},
+      ON_SALE = #{onSale,jdbcType=VARCHAR},
+      IS_AVAILABLE = #{isAvailable,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

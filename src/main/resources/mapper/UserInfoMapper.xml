@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pronghorn.coffee.user.dao.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.pronghorn.coffee.user.entity.UserInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="IMEI" jdbcType="VARCHAR" property="imei" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="PASS_WORD" jdbcType="VARCHAR" property="passWord" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="AGE" jdbcType="INTEGER" property="age" />
+    <result column="BIRTHDAY" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="WE_CHAT" jdbcType="VARCHAR" property="weChat" />
+    <result column="QQ_NO" jdbcType="CHAR" property="qqNo" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="SCHOOL" jdbcType="VARCHAR" property="school" />
+    <result column="SNO" jdbcType="VARCHAR" property="sno" />
+    <result column="TERM_OF_VALIDITY" jdbcType="TIMESTAMP" property="termOfValidity" />
+    <result column="IS_AVAILABLE" jdbcType="VARCHAR" property="isAvailable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, IMEI, USER_NAME, PASS_WORD, SEX, AGE, BIRTHDAY, WE_CHAT, QQ_NO, PHONE, EMAIL, 
+    SCHOOL, SNO, TERM_OF_VALIDITY, IS_AVAILABLE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from USER_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from USER_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pronghorn.coffee.user.entity.UserInfo">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      select replace(UUID(), '-', '') from dual
+    </selectKey>
+    insert into USER_INFO (ID, IMEI, USER_NAME, 
+      PASS_WORD, SEX, AGE, 
+      BIRTHDAY, WE_CHAT, QQ_NO, 
+      PHONE, EMAIL, SCHOOL, 
+      SNO, TERM_OF_VALIDITY, IS_AVAILABLE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{imei,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{passWord,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{weChat,jdbcType=VARCHAR}, #{qqNo,jdbcType=CHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
+      #{sno,jdbcType=VARCHAR}, #{termOfValidity,jdbcType=TIMESTAMP}, #{isAvailable,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pronghorn.coffee.user.entity.UserInfo">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      select replace(UUID(), '-', '') from dual
+    </selectKey>
+    insert into USER_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      ID,
+      <if test="imei != null">
+        IMEI,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="passWord != null">
+        PASS_WORD,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY,
+      </if>
+      <if test="weChat != null">
+        WE_CHAT,
+      </if>
+      <if test="qqNo != null">
+        QQ_NO,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="school != null">
+        SCHOOL,
+      </if>
+      <if test="sno != null">
+        SNO,
+      </if>
+      <if test="termOfValidity != null">
+        TERM_OF_VALIDITY,
+      </if>
+      <if test="isAvailable != null">
+        IS_AVAILABLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=VARCHAR},
+      <if test="imei != null">
+        #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weChat != null">
+        #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="qqNo != null">
+        #{qqNo,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="sno != null">
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="termOfValidity != null">
+        #{termOfValidity,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isAvailable != null">
+        #{isAvailable,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pronghorn.coffee.user.entity.UserInfo">
+    update USER_INFO
+    <set>
+      <if test="imei != null">
+        IMEI = #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        AGE = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weChat != null">
+        WE_CHAT = #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="qqNo != null">
+        QQ_NO = #{qqNo,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        SCHOOL = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="sno != null">
+        SNO = #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="termOfValidity != null">
+        TERM_OF_VALIDITY = #{termOfValidity,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isAvailable != null">
+        IS_AVAILABLE = #{isAvailable,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.pronghorn.coffee.user.entity.UserInfo">
+    update USER_INFO
+    set IMEI = #{imei,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=INTEGER},
+      BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      WE_CHAT = #{weChat,jdbcType=VARCHAR},
+      QQ_NO = #{qqNo,jdbcType=CHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      SCHOOL = #{school,jdbcType=VARCHAR},
+      SNO = #{sno,jdbcType=VARCHAR},
+      TERM_OF_VALIDITY = #{termOfValidity,jdbcType=TIMESTAMP},
+      IS_AVAILABLE = #{isAvailable,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
